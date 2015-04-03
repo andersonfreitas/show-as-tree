@@ -26,6 +26,13 @@ You get:
 
 ![Screenshot](screenshot.png)
 
+## Usage
+
+```console
+$ cat basictex-install.txt | tree-view
+$ tree-view basictex-install.txt
+```
+
 ## Use cases
 
 Sometimes, it's useful for discovering which files are being installed by some script:
