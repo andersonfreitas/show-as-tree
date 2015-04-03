@@ -1,6 +1,6 @@
 # tree-view
 
-Suppose you want to navigate a text file with the structure of the output of `find`.
+Easily navigate a text file with the structure of the output of `find`.
 
 ```console
 $ find . | head
