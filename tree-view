@@ -14,12 +14,10 @@ def todict(X):
     return d
 
 class TreeFrame(wx.Frame):
-  def __init__(self):
-    wx.Frame.__init__(self, None, title='show as tree',size=(400,600))
+  def __init__(self, parent, id, title):
+    wx.Frame.__init__(self, parent, id, title, size=(400,600))
 
-    tree_ctrl = wx.TreeCtrl(self, -1, style=wx.TR_DEFAULT_STYLE | \
-        wx.TR_FULL_ROW_HIGHLIGHT | \
-        wx.TR_EDIT_LABELS | wx.TR_HIDE_ROOT)
+    tree_ctrl = wx.TreeCtrl(self, -1, style=wx.TR_DEFAULT_STYLE | wx.TR_HIDE_ROOT)
 
     root = tree_ctrl.AddRoot('/')
 
@@ -30,21 +28,43 @@ class TreeFrame(wx.Frame):
 
     append(root, structure)
 
-    #tree_ctrl.ExpandAll()
+    # if "--expand":
+    #   tree_ctrl.ExpandAll()
     self.Centre()
     tree_ctrl.Bind(wx.EVT_KEY_UP, self.OnKeyUp)
+
+    # Create the menubar
+    menuBar = wx.MenuBar()
+
+    # and a menu
+    menu = wx.Menu()
+
+    # add an item to the menu, using \tKeyName automatically
+    # creates an accelerator, the third param is some help text
+    # that will show up in the statusbar
+    menu.Append(wx.ID_EXIT, "E&xit\tAlt-X", "Exit this simple sample")
+
+    # bind the menu event to an event handler
+    self.Bind(wx.EVT_MENU, self.Close, id=wx.ID_EXIT)
+
+    # and put the menu on the menubar
+    menuBar.Append(menu, "&File")
+    self.SetMenuBar(menuBar)
     
   def OnKeyUp(self, event):
     keyCode = event.GetKeyCode()
     if keyCode == wx.WXK_ESCAPE:
       self.Close()
 
-class MyApp(wx.App):
+class ShowAsTree(wx.App):
   def OnInit(self):
-    self.frame = TreeFrame()
+    self.frame = TreeFrame(None, -1, '-')
     self.frame.Show(True)
     self.SetTopWindow(self.frame)
     return True
+
+  def SetName(self, name):
+    self.frame.SetTitle(name)
 
 if __name__ == '__main__':
   lines = fileinput.input()
@@ -54,5 +74,6 @@ if __name__ == '__main__':
     dirs.append(filter(lambda x: len(x) > 0, l.replace('\n', '')[0:].split('/')))
   structure = todict(dirs)
 
-  app = MyApp(0)
+  app = ShowAsTree(0)
+  app.SetName(fileinput.filename())
   app.MainLoop()
