@@ -15,7 +15,7 @@ def todict(X):
 
 class TreeFrame(wx.Frame):
   def __init__(self):
-    wx.Frame.__init__(self, None, title='show as tree')
+    wx.Frame.__init__(self, None, title='show as tree',size=(400,600))
 
     tree_ctrl = wx.TreeCtrl(self, -1, style=wx.TR_DEFAULT_STYLE | \
         wx.TR_FULL_ROW_HIGHLIGHT | \
@@ -32,33 +32,26 @@ class TreeFrame(wx.Frame):
 
     #tree_ctrl.ExpandAll()
     self.Centre()
+    tree_ctrl.Bind(wx.EVT_KEY_UP, self.OnKeyUp)
+    
+  def OnKeyUp(self, event):
+    keyCode = event.GetKeyCode()
+    if keyCode == wx.WXK_ESCAPE:
+      self.Close()
 
-# Every wxWidgets application must have a class derived from wx.App
 class MyApp(wx.App):
-  # wxWindows calls this method to initialize the application
   def OnInit(self):
-    # Create an instance of our customized Frame class
-    frame = TreeFrame()
-    frame.Show(True)
-
-    # Tell wxWindows that this is our main window
-    self.SetTopWindow(frame)
-
-    # Return a success flag
+    self.frame = TreeFrame()
+    self.frame.Show(True)
+    self.SetTopWindow(self.frame)
     return True
 
 if __name__ == '__main__':
-
-  #text_file = open(sys.argv[1], "r")
-  #lines = text_file.readlines()
-
   lines = fileinput.input()
-
 
   dirs = []
   for l in lines:
-    dirs.append(l.replace('\n', '')[1:].split('/'))
-
+    dirs.append(filter(lambda x: len(x) > 0, l.replace('\n', '')[0:].split('/')))
   structure = todict(dirs)
 
   app = MyApp(0)
