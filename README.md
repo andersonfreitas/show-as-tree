@@ -2,24 +2,28 @@
 
 Suppose you want to navigate a text file with the structure of the output of `find`.
 
-    $ pwd
-    ~/Library
+```console
+$ pwd
+~/Library
 
-    $ find .  | head
-    .
-    ./.localized
-    ./Accounts
-    ./Accounts/Accounts3.sqlite
-    ./Accounts/Accounts3.sqlite-shm
-    ./Accounts/Accounts3.sqlite-wal
-    ./Application Scripts
-    ./Application Scripts/2BUA8C4S2C.com.agilebits.onepassword-osx-helper
-    ./Application Scripts/2BUA8C4S2C.com.agilebits.onepassword-osx-helper/1Password_Autosubmit.scpt
-    ./Application Support
+$ find .  | head
+.
+./.localized
+./Accounts
+./Accounts/Accounts3.sqlite
+./Accounts/Accounts3.sqlite-shm
+./Accounts/Accounts3.sqlite-wal
+./Application Scripts
+./Application Scripts/2BUA8C4S2C.com.agilebits.onepassword-osx-helper
+./Application Scripts/2BUA8C4S2C.com.agilebits.onepassword-osx-helper/1Password_Autosubmit.scpt
+./Application Support
+```
 
 Then, using `tree-view`:
 
-    $ find . | tree-view
+```console
+$ find . | tree-view
+```
 
 You get:
 
