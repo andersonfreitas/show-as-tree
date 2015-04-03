@@ -3,10 +3,7 @@
 Suppose you want to navigate a text file with the structure of the output of `find`.
 
 ```console
-$ pwd
-~/Library
-
-$ find .  | head
+$ find . | head
 .
 ./.localized
 ./Accounts
@@ -31,7 +28,7 @@ You get:
 
 ## Use cases
 
-Sometimes, it's useful for peeking which which are being installed:
+Sometimes, it's useful for discovering which files are being installed by some script:
 
 ```console
 $ find / > pre-install.txt
@@ -41,3 +38,4 @@ $ diff pre-install.txt post-install.txt > diff.txt
 $ awk # to replace '<', '>', and numeric positions
 $ tree-view diff.txt
 ```
+
