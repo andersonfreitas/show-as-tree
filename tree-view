@@ -17,13 +17,13 @@ class TreeFrame(wx.Frame):
   def __init__(self, parent, id, title):
     wx.Frame.__init__(self, parent, id, title, size=(400,600))
 
-    tree_ctrl = wx.TreeCtrl(self, -1, style=wx.TR_DEFAULT_STYLE | wx.TR_HIDE_ROOT)
+    self.tree_ctrl = wx.TreeCtrl(self, -1, style=wx.TR_DEFAULT_STYLE | wx.TR_HIDE_ROOT)
 
-    root = tree_ctrl.AddRoot('/')
+    root = self.tree_ctrl.AddRoot('')
 
     def append(base, lst):
       for k, v in lst.iteritems():
-        sub = tree_ctrl.AppendItem(base, k)
+        sub = self.tree_ctrl.AppendItem(base, k)
         append(sub, v)
 
     append(root, structure)
@@ -31,7 +31,7 @@ class TreeFrame(wx.Frame):
     # if "--expand":
     #   tree_ctrl.ExpandAll()
     self.Centre()
-    tree_ctrl.Bind(wx.EVT_KEY_UP, self.OnKeyUp)
+    self.tree_ctrl.Bind(wx.EVT_KEY_UP, self.OnKeyUp)
 
     # Create the menubar
     menuBar = wx.MenuBar()
@@ -55,6 +55,20 @@ class TreeFrame(wx.Frame):
     keyCode = event.GetKeyCode()
     if keyCode == wx.WXK_ESCAPE:
       self.Close()
+    if keyCode == wx.WXK_RETURN:
+        def build_path(item):
+            parent = self.tree_ctrl.GetItemParent(item)
+            label = self.tree_ctrl.GetItemText(item)
+            if parent and parent != self.tree_ctrl.GetRootItem():
+                return build_path(parent) + '/' + label
+            else:
+                return label
+
+        item = self.tree_ctrl.GetSelection()
+        label = build_path(item)
+
+        print label
+        self.Close()
 
 class ShowAsTree(wx.App):
   def OnInit(self):
