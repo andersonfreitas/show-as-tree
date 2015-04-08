@@ -1,0 +1,12 @@
+./Folder A
+./Folder A/File A.txt
+./Folder A/File B.txt
+./Folder A/File C.txt
+./Folder A/Folder
+./Folder A/Folder/File A.txt
+./Folder A/Folder/File B.txt
+./Folder A/Folder/File C.txt
+./Folder B/Folder
+./Folder B/Folder/File A.txt
+./Folder B/Folder/File B.txt
+./Folder B/Folder/File C.txt
