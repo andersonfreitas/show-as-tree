@@ -71,6 +71,8 @@ class TreeFrame(wx.Frame):
 
         print label
         self.Close()
+    if keyCode == wx.WXK_SPACE:
+        self.tree_ctrl.ExpandAll()
 
 class ShowAsTree(wx.App):
   def OnInit(self):
