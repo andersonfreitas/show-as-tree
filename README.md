@@ -49,3 +49,10 @@ $ awk # to replace '<', '>', and numeric positions
 $ tree-view diff.txt
 ```
 
+# Install
+
+```sh
+brew tap andersonfreitas/tree-view
+brew install andersonfreitas/tree-view
+```
+
