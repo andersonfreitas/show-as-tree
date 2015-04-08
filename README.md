@@ -3,17 +3,20 @@
 Easily navigate a text file with the structure of the output of `find`.
 
 ```console
-$ find . | head
+$ find . 
 .
-./.localized
-./Accounts
-./Accounts/Accounts3.sqlite
-./Accounts/Accounts3.sqlite-shm
-./Accounts/Accounts3.sqlite-wal
-./Application Scripts
-./Application Scripts/2BUA8C4S2C.com.agilebits.onepassword-osx-helper
-./Application Scripts/2BUA8C4S2C.com.agilebits.onepassword-osx-helper/1Password_Autosubmit.scpt
-./Application Support
+./Folder A
+./Folder A/File A.txt
+./Folder A/File B.txt
+./Folder A/File C.txt
+./Folder A/Folder
+./Folder A/Folder/File A.txt
+./Folder A/Folder/File B.txt
+./Folder A/Folder/File C.txt
+./Folder B/Folder
+./Folder B/Folder/File A.txt
+./Folder B/Folder/File B.txt
+./Folder B/Folder/File C.txt
 ```
 
 Then, using `tree-view`:
